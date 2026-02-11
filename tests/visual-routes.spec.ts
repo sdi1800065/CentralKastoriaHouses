@@ -15,8 +15,8 @@ for (const route of routes) {
 
   test(`visual snapshot: ${route}`, async ({ page }) => {
     await page.goto(route, { waitUntil: "networkidle" });
-    await expect(page.locator("iframe.legacy-frame-active")).toBeVisible();
-    await page.waitForTimeout(2300);
+    await expect(page.locator("header.site-header")).toBeVisible();
+    await page.waitForTimeout(600);
 
     await expect(page).toHaveScreenshot(`route-${routeSlug}.png`, {
       fullPage: true,

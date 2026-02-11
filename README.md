@@ -1,6 +1,6 @@
-# CentralKastoriaHouses React Migration
+# CentralKastoriaHouses
 
-This project now runs as a React + Vite app.
+This project runs as a native React + Vite + TypeScript app.
 
 ## Scripts
 
@@ -12,17 +12,26 @@ This project now runs as a React + Vite app.
 - `npm run test:visual:update` to generate/update visual snapshots
 - `npm run test:visual` to verify all route screenshots against baseline
 
-## What Was Migrated
+## Routes
 
-- The original mirrored website files are preserved under `public/legacy`.
-- React Router routes were added for:
-  - `/`
-  - `/diamerismata`
-  - `/topo8esia`
-  - `/epikoinwnia`
-  - `/centralkastoriahouseone`
-  - `/centralkastoriahousetwo`
-- Old `.html` links are mapped to the new React routes.
+- `/`
+- `/diamerismata`
+- `/topo8esia`
+- `/epikoinwnia`
+- `/centralkastoriahouseone`
+- `/centralkastoriahousetwo`
+- `/admin`
+
+Legacy `.html` URLs are redirected to the route equivalents.
+
+## Admin Image Upload
+
+- Open `/admin` to manage apartment images.
+- Choose an apartment and upload images.
+- Uploaded images are stored in browser local storage and applied to:
+  - apartment cards on `/diamerismata`
+  - gallery images on `/centralkastoriahouseone` and `/centralkastoriahousetwo`
+- To remove custom images, use the remove/clear actions on `/admin`.
 
 ## Visual Regression
 
