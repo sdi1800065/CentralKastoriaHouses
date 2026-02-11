@@ -1,4 +1,4 @@
-import type { SyntheticEvent } from "react";
+import { useEffect, useRef, type SyntheticEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import type { LegacyRoute } from "../legacyRouteMap";
 import {
@@ -81,6 +81,13 @@ function resetScrollPosition(frameEl: HTMLIFrameElement): void {
   doc.body.scrollTop = 0;
 }
 
+function resetScrollWithDelays(frameEl: HTMLIFrameElement): void {
+  resetScrollPosition(frameEl);
+  for (const delayMs of SCROLL_RESET_DELAYS_MS) {
+    window.setTimeout(() => resetScrollPosition(frameEl), delayMs);
+  }
+}
+
 function patchLogo(doc: Document): void {
   const logoImages = doc.querySelectorAll<HTMLImageElement>(
     "img.block-header-logo__image, img[alt*='logo' i]",
@@ -131,6 +138,9 @@ function applyDocumentPatches(doc: Document): void {
 
 export default function LegacyFrame({ activeRoute, title }: LegacyFrameProps) {
   const navigate = useNavigate();
+  const frameRefs = useRef<Partial<Record<LegacyRoute, HTMLIFrameElement | null>>>(
+    {},
+  );
 
   const addNavigationDelegate = (doc: Document): void => {
     const docEl = doc.documentElement;
@@ -171,10 +181,7 @@ export default function LegacyFrame({ activeRoute, title }: LegacyFrameProps) {
     applyDocumentPatches(doc);
     addNavigationDelegate(doc);
 
-    resetScrollPosition(frameEl);
-    for (const delayMs of SCROLL_RESET_DELAYS_MS) {
-      window.setTimeout(() => resetScrollPosition(frameEl), delayMs);
-    }
+    resetScrollWithDelays(frameEl);
 
     const observer = new MutationObserver(() => {
       applyDocumentPatches(doc);
@@ -182,6 +189,15 @@ export default function LegacyFrame({ activeRoute, title }: LegacyFrameProps) {
     observer.observe(doc.documentElement, { childList: true, subtree: true });
     window.setTimeout(() => observer.disconnect(), 4000);
   };
+
+  useEffect(() => {
+    const frameEl = frameRefs.current[activeRoute];
+    if (!frameEl) {
+      return;
+    }
+
+    resetScrollWithDelays(frameEl);
+  }, [activeRoute]);
 
   return (
     <div className="legacy-frame-wrap">
@@ -196,6 +212,9 @@ export default function LegacyFrame({ activeRoute, title }: LegacyFrameProps) {
           src={`${LEGACY_BASE_PATH}/${mappedFileName}`}
           title={title || route}
           onLoad={handleLoad}
+          ref={(node) => {
+            frameRefs.current[route] = node;
+          }}
           aria-hidden={route !== activeRoute}
         />
       ))}
