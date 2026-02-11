@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+﻿import { useEffect, useState, type ReactNode } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { LOGO_SRC, MAP_EMBED_SRC, ROUTES, copy, mainNav } from "../siteData";
 
@@ -23,6 +23,7 @@ export default function SiteLayout({ children }: SiteLayoutProps) {
         <div className="site-header__inner">
           <Link to={ROUTES.home} className="site-logo-link" aria-label="Home">
             <img src={LOGO_SRC} alt="CentralKastoriaHouses logo" className="site-logo" />
+            <span className="site-logo__title">Central Kastoria Houses</span>
           </Link>
 
           <button
@@ -92,7 +93,7 @@ export default function SiteLayout({ children }: SiteLayoutProps) {
         </div>
 
         <div className="site-footer__bottom">
-          <p>© 2026. All rights reserved.</p>
+          <p>&copy; 2026. All rights reserved.</p>
           <Link to={ROUTES.admin} className="site-footer__admin-link">
             Admin
           </Link>
@@ -101,3 +102,4 @@ export default function SiteLayout({ children }: SiteLayoutProps) {
     </div>
   );
 }
+

@@ -44,6 +44,35 @@ function isManagedImage(value: unknown): value is string {
   );
 }
 
+function normalizeManagedImagePath(value: string): string {
+  if (value.startsWith("data:image/")) {
+    return value;
+  }
+
+  if (value.startsWith("https://assets.zyrosite.com/")) {
+    return value.replace(
+      "https://assets.zyrosite.com/cdn-cgi/image/",
+      "/assets/cdn-cgi/image/",
+    );
+  }
+
+  if (value.startsWith("http://assets.zyrosite.com/")) {
+    return value.replace(
+      "http://assets.zyrosite.com/cdn-cgi/image/",
+      "/assets/cdn-cgi/image/",
+    );
+  }
+
+  if (value.startsWith("/assets.zyrosite.com/")) {
+    return value.replace(
+      "/assets.zyrosite.com/cdn-cgi/image/",
+      "/assets/cdn-cgi/image/",
+    );
+  }
+
+  return value;
+}
+
 function normalizeStore(
   candidate: unknown,
   allowOnlyDataImages = false,
@@ -60,7 +89,15 @@ function normalizeStore(
       return [];
     }
 
-    return images.filter(allowOnlyDataImages ? isDataImage : isManagedImage);
+    const validImages = images.filter(
+      allowOnlyDataImages ? isDataImage : isManagedImage,
+    ) as string[];
+
+    if (allowOnlyDataImages) {
+      return validImages;
+    }
+
+    return validImages.map(normalizeManagedImagePath);
   };
 
   return {

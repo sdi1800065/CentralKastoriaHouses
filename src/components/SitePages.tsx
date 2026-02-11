@@ -49,9 +49,6 @@ function apartmentGallery(
   return store[apartment.id].length ? store[apartment.id] : apartment.galleryImages;
 }
 
-const HIGH_RES_IMAGE_BASE =
-  "/assets/cdn-cgi/image/format=auto,w=1920/AGB64eZ1E0H835lp";
-
 function toLightboxImageSrc(imageSrc: string): string {
   if (imageSrc.startsWith("data:")) {
     return imageSrc;
@@ -62,7 +59,7 @@ function toLightboxImageSrc(imageSrc: string): string {
     return imageSrc;
   }
 
-  return `${HIGH_RES_IMAGE_BASE}/${match[1]}`;
+  return `/assets/highres/${match[1]}`;
 }
 
 function revealDelayClass(index: number): string {
@@ -140,7 +137,13 @@ function ImageLightbox({
   onPrevious,
   onNext,
 }: ImageLightboxProps) {
-  const activeImageSrc = toLightboxImageSrc(images[activeIndex]);
+  const galleryImageSrc = images[activeIndex];
+  const preferredImageSrc = toLightboxImageSrc(galleryImageSrc);
+  const [activeImageSrc, setActiveImageSrc] = useState(preferredImageSrc);
+
+  useEffect(() => {
+    setActiveImageSrc(preferredImageSrc);
+  }, [preferredImageSrc]);
 
   return (
     <div className="lightbox" role="dialog" aria-modal="true" aria-label={`${apartmentTitle} gallery viewer`}>
@@ -174,6 +177,11 @@ function ImageLightbox({
             src={activeImageSrc}
             alt={`${apartmentTitle} ${activeIndex + 1}`}
             className="lightbox__image"
+            onError={() => {
+              if (activeImageSrc !== galleryImageSrc) {
+                setActiveImageSrc(galleryImageSrc);
+              }
+            }}
           />
           <figcaption className="lightbox__caption">
             {activeIndex + 1} / {images.length}

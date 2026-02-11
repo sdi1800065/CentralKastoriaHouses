@@ -67,6 +67,9 @@ a {
 .site-logo-link {
   display: inline-flex;
   align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-link);
 }
 
 .site-logo {
@@ -74,6 +77,14 @@ a {
   height: 59px;
   object-fit: contain;
   display: block;
+}
+
+.site-logo__title {
+  font-size: 30px;
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 
 .site-nav {
@@ -928,6 +939,18 @@ button.admin-page__link {
     height: 48px;
   }
 
+  .site-logo-link {
+    gap: 10px;
+  }
+
+  .site-logo__title {
+    max-width: min(220px, calc(100vw - 120px));
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 22px;
+    line-height: 1.1;
+  }
+
   .site-nav-toggle {
     margin-left: auto;
     width: 24px;
@@ -952,17 +975,31 @@ button.admin-page__link {
 
   .site-nav {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 96px;
-    left: 0;
     right: 0;
+    left: auto;
+    width: min(236px, calc(100vw - 10px));
+    max-height: calc(100vh - 108px);
+    overflow-y: auto;
     background: #ffffff;
-    border-top: 1px solid #e5e7eb;
-    padding: 16px;
+    border: 1px solid #e5e7eb;
+    border-right: 0;
+    border-radius: 14px 0 0 14px;
+    box-shadow: 0 16px 36px rgba(15, 23, 42, 0.2);
+    padding: 12px 14px;
     flex-direction: column;
-    align-items: flex-end;
-    gap: 20px;
+    align-items: flex-start;
+    gap: 8px;
     margin-left: 0;
+    z-index: 60;
+  }
+
+  .site-nav__link {
+    width: 100%;
+    padding: 6px 2px;
+    font-size: 14px;
+    line-height: 20px;
   }
 
   .site-nav--open {
@@ -977,7 +1014,7 @@ button.admin-page__link {
     top: 96px;
     bottom: 0;
     border: 0;
-    background: rgba(17, 24, 39, 0.18);
+    background: rgba(17, 24, 39, 0.2);
     z-index: 45;
   }
 
@@ -1187,6 +1224,13 @@ button.admin-page__link {
     gap: 24px;
     padding-top: 24px;
     padding-bottom: 10px;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .site-footer__col {
+    align-items: center;
+    text-align: center;
   }
 
   .site-footer__col h3 {
@@ -1211,11 +1255,21 @@ button.admin-page__link {
   }
 
   .site-footer__map {
+    width: min(100%, 360px);
     height: 210px;
     border-radius: 14px;
   }
 
+  .site-footer__map-col {
+    justify-self: center;
+  }
+
   .site-footer__bottom {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 6px;
     padding-top: 12px;
     padding-bottom: 10px;
   }
@@ -1230,6 +1284,12 @@ button.admin-page__link {
 @media (max-width: 640px) {
   .gallery-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 380px) {
+  .site-logo__title {
+    font-size: 18px;
   }
 }
 
