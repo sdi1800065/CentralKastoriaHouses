@@ -13,11 +13,11 @@ export const ROUTES = {
 } as const;
 
 export const LOGO_SRC =
-  "/assets.zyrosite.com/cdn-cgi/image/format=auto,w=136,fit=crop,q=95/AGB64eZ1E0H835lp/logo-YbNv9KnJOOUPq2BE.png";
+  "/assets/cdn-cgi/image/format=auto,w=136,fit=crop,q=95/AGB64eZ1E0H835lp/logo-YbNv9KnJOOUPq2BE.png";
 
 // Keep hero path aligned with locally mirrored assets under /public.
 export const HERO_IMAGE_SRC =
-  "/assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/AGB64eZ1E0H835lp/20241230-_pou0166-2-dJo5QRr0MDc1Bvn9.jpg";
+  "/assets/cdn-cgi/image/format=auto,w=1920,fit=crop/AGB64eZ1E0H835lp/20241230-_pou0166-2-dJo5QRr0MDc1Bvn9.jpg";
 
 export const MAP_EMBED_SRC =
   "https://www.google.com/maps?q=Papareska%2020%2C%20Kastoria%2052100&output=embed";
@@ -77,7 +77,7 @@ export type HomeReview = {
 };
 
 const SQUARE_IMAGE_BASE =
-  "/assets.zyrosite.com/cdn-cgi/image/format=auto,w=398,h=398,fit=crop/AGB64eZ1E0H835lp";
+  "/assets/cdn-cgi/image/format=auto,w=398,h=398,fit=crop/AGB64eZ1E0H835lp";
 
 const withSquareImage = (fileName: string): string =>
   `${SQUARE_IMAGE_BASE}/${fileName}`;
@@ -90,7 +90,7 @@ export const apartments: ApartmentDetails[] = [
     subtitle:
       "Modern interior, bright spaces, and ideal location in the center of Kastoria.",
     coverImage:
-      "/assets.zyrosite.com/cdn-cgi/image/format=auto,w=449,h=445,fit=crop/AGB64eZ1E0H835lp/20250104-_pou0314-YNqPQRVxMlunoeav.jpg",
+      "/assets/cdn-cgi/image/format=auto,w=449,h=445,fit=crop/AGB64eZ1E0H835lp/20250104-_pou0314-YNqPQRVxMlunoeav.jpg",
     galleryImages: [
       "20250104-_pou0314-YNqPQRVxMlunoeav.jpg",
       "20250104-_pou0319-dOq8nR6LX3hPlDqN.jpg",
@@ -112,7 +112,7 @@ export const apartments: ApartmentDetails[] = [
     subtitle:
       "Cozy and elegant apartment with warm tones, perfect for couples and families.",
     coverImage:
-      "/assets.zyrosite.com/cdn-cgi/image/format=auto,w=431,h=427,fit=crop/AGB64eZ1E0H835lp/20241230-_pou0166-Aq2qg4yQXJFbJ9po.jpg",
+      "/assets/cdn-cgi/image/format=auto,w=431,h=427,fit=crop/AGB64eZ1E0H835lp/20241230-_pou0166-Aq2qg4yQXJFbJ9po.jpg",
     galleryImages: [
       "20241230-_pou0166-Aq2qg4yQXJFbJ9po.jpg",
       "20241230-_pou0194-AR0M8P4zklIkZQql.jpg",

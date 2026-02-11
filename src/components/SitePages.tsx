@@ -50,7 +50,7 @@ function apartmentGallery(
 }
 
 const HIGH_RES_IMAGE_BASE =
-  "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920/AGB64eZ1E0H835lp";
+  "/assets/cdn-cgi/image/format=auto,w=1920/AGB64eZ1E0H835lp";
 
 function toLightboxImageSrc(imageSrc: string): string {
   if (imageSrc.startsWith("data:")) {
